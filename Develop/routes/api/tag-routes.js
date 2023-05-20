@@ -74,7 +74,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id,
   },})
   .then((qtyRemoved) => {
-    res.json('${qtyRemoved} was removed from the database');})
+    res.json(`${qtyRemoved} was removed from the database`);})
   .catch((err) => {
     res.json(err);
   })

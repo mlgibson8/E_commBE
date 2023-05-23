@@ -20,17 +20,18 @@ await Tag.findAll({
   res.json(err);
 });
 });
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-Tag.findByPk(req.params.id, {
+
+await  Tag.findByPk(req.params.id, {
   include: [
     {model: Product,
       attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
       through: ProductTag,
     },],
 })
-then((retrievedTag) => {
+.then((retrievedTag) => {
   res.json(retrievedTag);
   })
   .catch((err) => { 
@@ -38,9 +39,9 @@ then((retrievedTag) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
-  Tag.create({
+ await  Tag.create({
     tag_name: req.body.tag_name,
   })
   .then((tag) => {
@@ -51,30 +52,31 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update({
+ await Tag.update({
     tag_name: req.body.tag_name,
   },{
     where: {
       id: req.params.id,
   },})
   .then((tag) => {
-    res.json(tag);
+    
+    res.json(`tag was updated in the database`);
   })
   .catch((err) => {
     res.json(err);
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',async (req, res) => {
   // delete on tag by its `id` value
-  Tag.destroy({
+ await Tag.destroy({
     where: {
       id: req.params.id,
   },})
-  .then((qtyRemoved) => {
-    res.json(`${qtyRemoved} was removed from the database`);})
+  .then((tag) => {
+    res.json(`tag was removed from the database`);})
   .catch((err) => {
     res.json(err);
   })

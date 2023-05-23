@@ -31,10 +31,10 @@ router.get('/', async (req, res) => {
 ;
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async(req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-  Product.findByPk(req.params.id, {
+  await Product.findByPk(req.params.id, {
     include: [
       {
         model: Tag,
@@ -56,7 +56,7 @@ router.get('/:id', (req, res) => {
   });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  Product.create(req.body)
+ await Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
@@ -88,9 +88,9 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update product data
-  Product.update(req.body, {
+ await Product.update(req.body, {
     where: {
       id: req.params.id,
     },
@@ -122,23 +122,22 @@ router.put('/:id', (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) =>{ res.json(updatedProductTags); res.json('the product has been updated.');})
     .catch((err) => {
-      // console.log(err);
+       console.log(err);
       res.status(400).json(err);
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
-  let deletedProduct = product.findByPk(req.params.id);
-  Product.destroy({
+await Product.destroy({
     where: {
       id: req.params.id,
     },
   })
   .then((product) => {
-    res.json('${deletedProduct} has been deleted.');
+    res.json('the product has been deleted.');
   })
   .catch((err) => {
     res.json(err);

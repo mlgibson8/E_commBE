@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
   })
   .catch((err) => {
     res.json(err);
-  }):
+  });
 });
 
 router.delete('/:id', (req, res) => {

@@ -38,7 +38,7 @@ await Category.findByPk(req.params.id, {
 router.post('/', async (req, res) => {
   // create a new category
   await Category.create(req.body)
-  .then((newCategory) => { res.status(200).json(newCategory);
+  .then((newCategory) => { res.status(200).json(newCategory)
   res.json('the category was created');})
   .catch((err) => {res.status(400).json(err);console.log(err);
 });

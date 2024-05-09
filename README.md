@@ -6,7 +6,7 @@
 ![Screenshot](https://github.com/mlgibson8/E_commBE/blob/main/Develop/e_commerce.png)
 
 ## Video    
-![link](https://drive.google.com/file/d/1qQIr8gIrpviNbl4OfXklzz3GSavI7xqE/view?usp=share_linkhttps://drive.google.com/file/d/1qQIr8gIrpviNbl4OfXklzz3GSavI7xqE/view?usp=share_link)
+![link] (https://drive.google.com/file/d/1qQIr8gIrpviNbl4OfXklzz3GSavI7xqE/view?usp=share_linkhttps://drive.google.com/file/d/1qQIr8gIrpviNbl4OfXklzz3GSavI7xqE/view?usp=share_link)
 ## Table of Contents
 * [Installation](#installation)
 * [Features](#features)
